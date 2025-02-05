@@ -5,10 +5,6 @@ import Footer from "@/components/Footer";
 import CountProvider from "@/utils/CountProvider";
 import AuthProvider, { AuthContext } from "@/utils/AuthProvider";
 
-import axios from "axios";
-
-axios.defaults.baseURL = "https://ecommerce-c58p.vercel.app/";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

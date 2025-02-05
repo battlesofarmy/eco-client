@@ -1,13 +1,18 @@
-import axios from 'axios';
+import api from '@/utils/axiosCongif';
 import Image from 'next/image';
 import React from 'react'
 
 export default async function SingleProduct({params}) {
-  const { _id } = params;
-  // const res = await fetch(`http://localhost:5000/products/${_id}`);
-  // const product = await res.json();
-  const res = await axios.get(`/products/${_id}`);
-  const product = await res.json();
+  const { _id } = await params;
+  
+  let product;
+  try{
+    const res = await api.get(`/products/${_id}`);
+    product =  res.json();
+
+  }catch(err){
+    console.log(err);
+  }
 
   return (
     <>

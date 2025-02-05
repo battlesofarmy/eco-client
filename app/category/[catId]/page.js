@@ -1,17 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
+import api from "@/utils/axiosCongif";
+
 
 export default async function SubCatagories({params}) {
-  const { catId } = params;
+  const { catId } = await params;
 
-  // Fetch data on the server
-  // const res = await fetch(`http://localhost:5000/subcategories/category/${catId}`);
-  // const subcategories = await res.json();
+  let subcategories =[];
+  try{
+    const res = await api.get(`/subcategories/category/${catId}`);
+    subcategories = res.data;
 
-  // Fetch data on the server
-  const res = await axios.get(`/subcategories/category/${catId}`);
-  const subcategories = await res.data;
+  }catch(err){
+    console.log(err)
+  }
 
 
   return (

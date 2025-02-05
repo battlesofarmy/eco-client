@@ -1,15 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import axios from "axios";
+import api from "@/utils/axiosCongif";
 
 export default async function Catagories() {
   // Fetch data on the server
-  // const res = await fetch("http://localhost:5000/categories");
-  // const categories = await res.json();
+  let categories =[];
+  try{
+    const res = await api.get('/categories');
+    categories = res.data;
 
-  const res = await axios.get('/categories');
-  const categories = await res.data;
-
+  }catch(err){
+    console.log(err)
+  }
 
   return (
     <>

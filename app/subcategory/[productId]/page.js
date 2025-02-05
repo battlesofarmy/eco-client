@@ -1,19 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import CartWishlistIcon from "@/components/CartWishlistIcon";
-import axios from "axios";
-// import { FaHeart, FaRegHeart } from "react-icons/fa";
-// import { IoCartOutline } from "react-icons/io5";
-
+import api from "@/utils/axiosCongif";
 
 export default async function Products({params}) {
-    const { productId } = params;
+  const { productId } = await params;
+  let subcategories = [];
 
-  // Fetch data on the server
-//   const res = await fetch(`http://localhost:5000/products/subcategory/${productId}`);
-//   const subcategories = await res.json();
-  const res = await axios.get(`/products/subcategory/${productId}`);
-  const subcategories = await res.data;
+  try {
+    const res = await api.get(`/products/subcategory/${productId}`);
+    subcategories = res.data;
+
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+  }
 
   return (
     <>
@@ -24,9 +24,6 @@ export default async function Products({params}) {
                 {subcategories?.map((ele) => (
                     <div className="shadow relative" key={ele._id}>
                     <Link href={`/subcategory/${productId}/${ele._id}`}>
-                        {
-                            console.log(ele)
-                        }
                         <Image
                             src={ele.img}
                             alt={ele.name}

@@ -6,20 +6,24 @@ import axios from "axios";
 // import { IoCartOutline } from "react-icons/io5";
 
 
+// export default async function Products(context) {
 export default async function Products({params}) {
-    const { subCatId } = params;
+    const { subCatId } = await params;
 
-//   Fetch data on the server
-//   const res = await fetch(`http://localhost:5000/products/subcategory/${subCatId}`);
-//   const subcategories = await res.json();
 
-  const res = await axios.get(`/products/subcategory/${subCatId}`);
-  const subcategories = await res.data;
+  let subcategories = [];
 
-  
+  try {
+    const res = await api.get(`/products/subcategory/${productId}`);
+    subcategories = res.data;
+
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+  }
 
   return (
     <>
+    context page
         <section className="py-10">
             <div className="container">
                 <div className="grid grid-cols-4 gap-6">
