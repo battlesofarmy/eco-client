@@ -17,7 +17,6 @@ export default async function Products({params}) {
 
   return (
     <>
-    hello world
   <section className="py-10">
             <div className="container">
                 <div className="grid grid-cols-4 gap-6">

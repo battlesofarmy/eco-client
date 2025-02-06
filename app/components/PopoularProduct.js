@@ -3,12 +3,11 @@ import Image from "next/image";
 import api from "@/utils/axiosCongif";
 
 
-export default async function SubCatagories({params}) {
-  const { catId } = await params;
+export default async function PopularProduct() {
 
   let subcategories =[];
   try{
-    const res = await api.get(`/subcategories/category/${catId}`);
+    const res = await api.get(`/subcategories/category/106`);
     subcategories = res.data;
 
   }catch(err){

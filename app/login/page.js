@@ -8,11 +8,13 @@ import Image from 'next/image';
 import { AuthContext } from '@/utils/AuthProvider';
 import auth from "@/utils/FireBase.config";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 
 export default function Login() {
     // new way 
     const {signInUser} = useContext(AuthContext);
+    const router = useRouter();
 
     // States
     const [showPass, setShowPass] = useState(false);
@@ -34,12 +36,14 @@ export default function Login() {
         signInUser(email, password)
         .then((res)=>{
             // const loggedUser = res.user;
-            if(res.user.emailVerified){
-                setSuccessMsg("SuccessFully Login");
-                e.target.reset();
-            }else{
-                setErrMsg("Please Varify Your Email First");
-            }
+            setSuccessMsg("SuccessFully Login");
+            router.push('/');
+            // if(res.user.emailVerified){
+            //   setSuccessMsg("SuccessFully Login");
+            //     e.target.reset();
+            // }else{
+            //     setErrMsg("Please Varify Your Email First");
+            // }
         })
         .catch(err=>{
             // console.log(err.message)

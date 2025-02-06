@@ -8,20 +8,23 @@ import { CountContext } from "@/utils/CountProvider";
 import { AuthContext } from "@/utils/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
+import api from "@/utils/axiosCongif";
 
 export default function MyCart() {
 const {user, loading} = useContext(AuthContext);
 const [allCartItems, setAllCartItems] = useState([]);
 const {cartCount, setCartCount} = useContext(CountContext);
-// const [count, setCount] = useState(0);
+
 
 useEffect(()=>{
-    axios.get(`http://localhost:5000/cart/${user?.email}`)
+  // axios.get(`http://localhost:5000/cart/${user?.email}`)
+  api.get(`/cart/${user?.email}`)
     .then(res=>setAllCartItems(res.data));
 },[loading]);
 
 const handleCartItemDelete =(id)=>{
-    axios.delete(`http://localhost:5000/cart/delete/${id}`)
+    // axios.delete(`http://localhost:5000/cart/delete/${id}`)
+    api.delete(`/cart/delete/${id}`)
     .then(()=> {
       setCartCount(cartCount-1);
       setAllCartItems((data)=> data.filter(tem=> tem._id != id))
@@ -30,14 +33,16 @@ const handleCartItemDelete =(id)=>{
 }
 
 const increaseProdouctCount =(ele)=>{
-  axios.post(`http://localhost:5000/cart/add`,ele)
+  // axios.post(`http://localhost:5000/cart/add`,ele)
+  api.post(`/cart/add`,ele)
   .then(()=> {
     setAllCartItems((data)=> data.map(tem=> tem._id === ele._id ? { ...tem, count: tem.count + 1 } : tem));
   })
 }
 
 const decreaseProdouctCount =(ele)=>{
-  axios.post(`http://localhost:5000/cart/remove`,ele)
+  // axios.post(`http://localhost:5000/cart/remove`,ele)
+  api.post(`/cart/remove`,ele)
   .then(()=>{
     setAllCartItems((data)=> data.map(tem=> tem._id === ele._id ? { ...tem, count: tem.count-1 } : tem));
   })

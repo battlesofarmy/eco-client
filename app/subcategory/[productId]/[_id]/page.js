@@ -16,7 +16,6 @@ export default async function SingleProduct({params}) {
 
   return (
     <>
-      Single page johfa
       <section className='py-20'>
           <div className="container">
               <Image width={600} height={400} src={product.img} alt={product.img}/>

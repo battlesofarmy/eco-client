@@ -1,41 +1,63 @@
-import Image from 'next/image';
-import React from 'react';
+import React from 'react'
+import logo from '@/public/logo.svg'
+import Link from 'next/link'
+import Image from 'next/image'
 
-function Footer() {
+
+export default function Footer() {
   return (
-    <div className="bg-gray-900">
-      <div className="max-w-2xl mx-auto text-white py-10">
-        <div className="text-center">
-          <h3 className="text-3xl mb-3">Download our fitness app</h3>
-          <p>Stay fit. All day, every day.</p>
-          <div className="flex justify-center my-10">
-            <div className="flex items-center border rounded-lg px-4 py-2 w-52 mx-2">
-              <Image src="https://cdn-icons-png.flaticon.com/512/888/888857.png" alt="Google Play Store" className="w-7 md:w-8" width={50} height={50} />
-              <div className="text-left ml-3">
-                <p className="text-xs text-gray-200">Download on</p>
-                <p className="text-sm md:text-base">Google Play Store</p>
-              </div>
-            </div>
-            <div className="flex items-center border w-auto rounded-lg px-4 py-2 w-44 mx-2">
-              {/* <img src="https://cdn-icons-png.flaticon.com/512/888/888841.png" alt="Apple Store" className="w-7 md:w-8" /> */}
-              <div className="text-left ml-3">
-                <p className="text-xs text-gray-200">Download on</p>
-                <p className="text-sm md:text-base">Apple Store</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
-          <p className="order-2 md:order-1 mt-8 md:mt-0">&copy; Beautiful Footer, 2021.</p>
-          <div className="order-1 md:order-2">
-            <span className="px-2">About us</span>
-            <span className="px-2 border-l">Contact us</span>
-            <span className="px-2 border-l">Privacy Policy</span>
-          </div>
+    <footer class="bg-gray-50">
+  <div class="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
+    <div class="max-w-sm">
+      <div class="mb-6 flex h-12 items-center space-x-2">
+        <span class="text-2xl font-bold">
+            <Link href='/'>
+              <Image src={logo} width={150} height={150} alt='Logo'/>
+            </Link>
+        </span>
+      </div>
+      <div class="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad a officia ea expedita!</div>
+    </div>
+    <div class="">
+      <div class="mt-4 mb-2 font-medium xl:mb-4">Address</div>
+      <div class="text-gray-500">
+        35 Remida Heights, <br />
+        45 Street, <br />
+        South Caroline, US
+      </div>
+    </div>
+    <div class="">
+      <div class="mt-4 mb-2 font-medium xl:mb-4">Links</div>
+      <nav aria-label="Footer Navigation" class="text-gray-500">
+        <ul class="space-y-3">
+          <li><a class="hover:text-blue-600 hover:underline" href="#">Pricing</a></li>
+          <li><a class="hover:text-blue-600 hover:underline" href="#">Demo</a></li>
+          <li><a class="hover:text-blue-600 hover:underline" href="#">Press</a></li>
+          <li><a class="hover:text-blue-600 hover:underline" href="#">Support Hub</a></li>
+          <li><a class="hover:text-blue-600 hover:underline" href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="">
+      <div class="mt-4 mb-2 font-medium xl:mb-4">Subscribe to our Newsletter</div>
+      <div class="flex flex-col">
+        <div class="mb-4">
+          <input type="email" class="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-blue-600" placeholder="Enter your email" />
+          <button class="block rounded-xl bg-primary px-6 py-3 font-medium text-white">Subscribe</button>
         </div>
       </div>
     </div>
-  );
+  </div>
+  <div class="bg-gray-100">
+    <div class="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-gray-500 sm:flex-row sm:justify-between sm:text-left">
+      <div class="">© 2025 ShopOne | All Rights Reserved</div>
+      <div class="">
+        <a class="" href="#">Privacy Policy</a>
+        <span>|</span>
+        <a class="" href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+  )
 }
-
-export default Footer;

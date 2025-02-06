@@ -2,6 +2,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react"
 import { AuthContext } from "./AuthProvider";
+import api from "./axiosCongif";
 
 export const CountContext = createContext(null);
 
@@ -12,12 +13,14 @@ export default function CountProvider({children}) {
   const {user, loading} = useContext(AuthContext);
 
   useEffect(()=>{
-    axios.get(`http://localhost:5000/cart/${user?.email}`)
+    // axios.get(`http://localhost:5000/cart/${user?.email}`)
+    api.get(`/cart/${user?.email}`)
     .then((res)=> setCartCount(res.data?.length))
     .catch((err)=> console.log(err));
 
 
-    axios.get(`http://localhost:5000/wishlist/${user?.email}`)
+    // axios.get(`http://localhost:5000/wishlist/${user?.email}`)
+    api.get(`/wishlist/${user?.email}`)
     .then((res)=> setWishlistCount(res.data[0]?.products.length))
     .catch((err)=> console.log(err));
     

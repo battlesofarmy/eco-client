@@ -2,20 +2,20 @@ import Link from "next/link";
 import Image from "next/image";
 import CartWishlistIcon from "@/components/CartWishlistIcon";
 import axios from "axios";
+import api from "@/utils/axiosCongif";
 // import { FaHeart, FaRegHeart } from "react-icons/fa";
 // import { IoCartOutline } from "react-icons/io5";
 
 
-// export default async function Products(context) {
-export default async function Products({params}) {
-    const { subCatId } = await params;
+export default async function Products(context) {
+    const { catId, subCatId } = await context.params;
 
 
-  let subcategories = [];
+  let products = [];
 
   try {
-    const res = await api.get(`/products/subcategory/${productId}`);
-    subcategories = res.data;
+    const res = await api.get(`/products/subcategory/${subCatId}`);
+    products = res.data;
 
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -23,13 +23,12 @@ export default async function Products({params}) {
 
   return (
     <>
-    context page
         <section className="py-10">
             <div className="container">
                 <div className="grid grid-cols-4 gap-6">
-                {subcategories?.map((ele) => (
+                {products?.map((ele) => (
                     <div className="shadow relative" key={ele._id}>
-                    <Link href={`/muntasir`}>
+                    <Link href={`/category/${ele.catId}/${ele.subCatId}/${ele._id}`}>
                         <Image
                             src={ele.img}
                             alt={ele.name}

@@ -18,10 +18,18 @@ module.exports = {
         sm: '600px',
         md: '728px',
         lg: '984px',
-        xl: '1200px',
+        xl: '1250px',
         '2xl': '1496px',
       },
+      colors: {
+        primary : "#000"
+      }
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary : "#2D6F6D",
+        secondary : "#FFBB38"
+      }
+    },
   }
 }

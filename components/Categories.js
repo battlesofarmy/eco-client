@@ -2,30 +2,25 @@ import Link from "next/link";
 import Image from "next/image";
 import api from "@/utils/axiosCongif";
 
-
-export default async function SubCatagories({params}) {
-  const { catId } = await params;
-
-  let subcategories =[];
+export default async function Catagories() {
+  // Fetch data on the server
+  let categories =[];
   try{
-    const res = await api.get(`/subcategories/category/${catId}`);
-    subcategories = res.data;
+    const res = await api.get('/categories');
+    categories = res.data;
 
   }catch(err){
     console.log(err)
   }
-
 
   return (
     <>
       <section className="py-10">
           <div className="container">
               <div className="grid grid-cols-5 gap-6">
-              {subcategories?.map((ele) => (
-                
+              {categories?.map((ele) => (
                   <div className="shadow" key={ele.id}>
-                    {console.log(ele)}
-                  <Link href={`/category/${ele.catId}/${ele.subCatId}`}>
+                  <Link href={`/category/${ele.id}`}>
                     <Image
                         src={ele.img}
                         alt={ele.name}

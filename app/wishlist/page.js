@@ -8,6 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { CountContext } from "@/utils/CountProvider";
 import { AuthContext } from "@/utils/AuthProvider";
 import Image from "next/image";
+import api from "@/utils/axiosCongif";
 
 export default function Wishlist() {
    const {user, loading} = useContext(AuthContext);
@@ -19,7 +20,8 @@ export default function Wishlist() {
    // Load wishlist data
    useEffect(()=>{
      if(user?.email){
-        axios.get(`http://localhost:5000/wishlist/${user?.email}`)
+        // axios.get(`http://localhost:5000/wishlist/${user?.email}`)
+        api.get(`/wishlist/${user?.email}`)
         .then((res)=> {
             setWishlist(res.data[0]?.products);
             console.log(res.data[0]?.products)
@@ -37,7 +39,7 @@ const wishlistToCart = async (ele) => {
 
     try {
       // Remove from wishlist
-      await axios.patch(`https://ecommerce.muntasir3301.xyz/wishlist/${user.email}`, ele);
+      await api.patch(`/wishlist/${user.email}`, ele);
   
       // Update local wishlist state
       setListCount((prev) => prev - 1);

@@ -3,11 +3,9 @@ import { CountContext } from '@/utils/CountProvider';
 import React, { useContext, useEffect, useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { IoCartOutline } from 'react-icons/io5'
-import axios from 'axios';
-import { userAgent } from 'next/server';
 import { AuthContext } from '@/utils/AuthProvider';
 import { ToastContainer, toast } from 'react-toastify';
-import Link from 'next/link';
+import api from '@/utils/axiosCongif';
 
 
 export default function CartWishlistIcon({ele}) {
@@ -16,11 +14,13 @@ export default function CartWishlistIcon({ele}) {
 
 
   const  handleAddToCart =()=> {
+    // alert("hi");
 
     ele.count = 1;
     ele.email = user.email;
 
-    axios.post('http://localhost:5000/cart/add', ele)
+    // axios.post('http://localhost:5000/cart/add', ele)
+    api.post('/cart/add', ele)
     .then((res)=> {
       if(res.status===200){
         setCartCount(cartCount+1);
@@ -31,8 +31,9 @@ export default function CartWishlistIcon({ele}) {
   }
 
   const handleAddToWishlist =()=>{
-
-    axios.post(`http://localhost:5000/wishlist/${user?.email}`, ele)
+    
+    // axios.post(`http://localhost:5000/wishlist/${user?.email}`, ele)
+    api.post(`/wishlist/${user?.email}`, ele)
     .then((res)=> {
       if(res.status===200){
         setWishlistCount(wishlistCount+1);
