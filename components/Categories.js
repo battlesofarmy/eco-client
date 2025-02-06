@@ -8,6 +8,7 @@ export default async function Catagories() {
   try{
     const res = await api.get('/categories');
     categories = res.data;
+    console.log(categories)
 
   }catch(err){
     console.log(err)
