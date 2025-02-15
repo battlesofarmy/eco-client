@@ -13,8 +13,7 @@ export default function CountProvider({children}) {
   const {user, loading} = useContext(AuthContext);
 
   useEffect(()=>{
-    // axios.get(`http://localhost:5000/cart/${user?.email}`)
-    api.get(`/cart/${user?.email}`)
+    api.get(`/cart/${user?.email}`, {withCredentials: true})
     .then((res)=> setCartCount(res.data?.length))
     .catch((err)=> console.log(err));
 

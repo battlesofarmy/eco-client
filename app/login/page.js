@@ -6,14 +6,16 @@ import { MdOutlineErrorOutline } from "react-icons/md";
 import { useContext, useRef, useState } from "react";
 import Image from 'next/image';
 import { AuthContext } from '@/utils/AuthProvider';
-import auth from "@/utils/FireBase.config";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
+import auth from "@/utils/FireBase.config";
+import api from "@/utils/axiosCongif";
+import { userAgent } from "next/server";
 
 
 export default function Login() {
     // new way 
-    const {signInUser} = useContext(AuthContext);
+    const {signInUser, user} = useContext(AuthContext);
     const router = useRouter();
 
     // States
@@ -36,8 +38,12 @@ export default function Login() {
         signInUser(email, password)
         .then((res)=>{
             // const loggedUser = res.user;
+            const user = {email: email}
+            api.post('/jwt', user, {withCredentials: true})
+            .then(res=> console.log('response taken: ', res.data))
+            .then(err=>console.log(err))
+
             setSuccessMsg("SuccessFully Login");
-            router.push('/');
             // if(res.user.emailVerified){
             //   setSuccessMsg("SuccessFully Login");
             //     e.target.reset();
@@ -71,11 +77,20 @@ export default function Login() {
                 console.log(err.message);
             })
         }
-    }   
+    } 
+    const jwtToken =()=>{
+     //
+    } 
 
     return (
       <>
     
+    <br />
+    <br />
+    <button onClick={jwtToken} className="btn btn-primary">Create a JWT token</button>
+
+    <br />
+    <br />
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <Image

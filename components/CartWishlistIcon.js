@@ -19,8 +19,7 @@ export default function CartWishlistIcon({ele}) {
     ele.count = 1;
     ele.email = user.email;
 
-    // axios.post('http://localhost:5000/cart/add', ele)
-    api.post('/cart/add', ele)
+    api.post('/cart/add', ele, {withCredentials: true})
     .then((res)=> {
       if(res.status===200){
         setCartCount(cartCount+1);
@@ -32,7 +31,6 @@ export default function CartWishlistIcon({ele}) {
 
   const handleAddToWishlist =()=>{
     
-    // axios.post(`http://localhost:5000/wishlist/${user?.email}`, ele)
     api.post(`/wishlist/${user?.email}`, ele)
     .then((res)=> {
       if(res.status===200){

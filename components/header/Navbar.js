@@ -13,7 +13,8 @@ import logo from '../../public/logo.svg'
 
 const navigation = [
   { name: 'Home', href: '/', current: true },
-  { name: 'Category', href: '/category', current: false },
+  // { name: 'Category', href: '/category', current: false },
+  { name: 'Product', href: '/category/103/1301', current: false },
   { name: 'Sub Category', href: '/subcategory', current: false },
   { name: 'Contact', href: '/contact', current: false },
 ];
@@ -84,7 +85,7 @@ export default function Navbar() {
               </div>
               {
                 user ?
-                <button onClick={handleLogout} className='text-green-400 mx-5'>Logout</button>
+                <button onClick={handleLogout} className='text-green-400 mx-5'>{user?.email}</button>
                 :
                 <>
                   <Link href={'/login'} className='text-[15px] px-4'>Login</Link>

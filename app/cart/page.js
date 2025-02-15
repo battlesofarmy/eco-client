@@ -17,13 +17,11 @@ const {cartCount, setCartCount} = useContext(CountContext);
 
 
 useEffect(()=>{
-  // axios.get(`http://localhost:5000/cart/${user?.email}`)
   api.get(`/cart/${user?.email}`)
     .then(res=>setAllCartItems(res.data));
 },[loading]);
 
 const handleCartItemDelete =(id)=>{
-    // axios.delete(`http://localhost:5000/cart/delete/${id}`)
     api.delete(`/cart/delete/${id}`)
     .then(()=> {
       setCartCount(cartCount-1);
@@ -33,7 +31,6 @@ const handleCartItemDelete =(id)=>{
 }
 
 const increaseProdouctCount =(ele)=>{
-  // axios.post(`http://localhost:5000/cart/add`,ele)
   api.post(`/cart/add`,ele)
   .then(()=> {
     setAllCartItems((data)=> data.map(tem=> tem._id === ele._id ? { ...tem, count: tem.count + 1 } : tem));
@@ -41,7 +38,6 @@ const increaseProdouctCount =(ele)=>{
 }
 
 const decreaseProdouctCount =(ele)=>{
-  // axios.post(`http://localhost:5000/cart/remove`,ele)
   api.post(`/cart/remove`,ele)
   .then(()=>{
     setAllCartItems((data)=> data.map(tem=> tem._id === ele._id ? { ...tem, count: tem.count-1 } : tem));
